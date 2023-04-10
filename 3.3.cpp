@@ -18,9 +18,9 @@ int main(){
 
     queue<int> q;
 
-    q.push(1);
-    mark[1] = 1;
-    cout << "1 ";
+    q.push(12);
+    mark[12] = 1;
+    cout << "12 ";
 
     while(q.size() != 0){
         int u = q.front();

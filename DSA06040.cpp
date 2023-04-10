@@ -31,11 +31,11 @@ void process(){
     }
 
     for(auto i : m1){
-        int k1 = min(i.second, m2[i.first]);
-        int k2 = min(m2[i.first], m3[i.first]);
-        int k = min(k1, k2);
+        long long k1 = min(i.second, m2[i.first]);
+        long long k2 = min(m2[i.first], m3[i.first]);
+        long long k = min(k1, k2);
         if(k != 0){
-            for(int j = 0; j < k; j++){
+            for(long long j = 0; j < k; j++){
                 cout << i.first << " ";
                 mark = 1;
             }

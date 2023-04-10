@@ -10,20 +10,27 @@ long long x;
 void process(){
     cin >> n >> k;
 
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i <= n; i++){
         cin >> a[i];
     }
 
-    priority_queue<int> pq;
+    deque<int> dq;
 
-    for(int i = 0; i < k; i++){
-        pq.push(a[i]);
-    }
+    for(int i = 1; i <= n; i++){
+        while(dq.size() && a[dq.back()] <= a[i]){
+            dq.pop_back();
+        }
 
-    for(int i = k; i < n; i++){
-        cout << pq.top();
-        pq.po
+        if(dq.size() && dq.front() + k <= i){
+            dq.pop_front();
+        }
+
+        dq.push_back(i);
+        if(i >= k){
+            cout << a[dq.front()] << " ";
+        }
     }
+    cout << "\n";
 }
 
 int main(){

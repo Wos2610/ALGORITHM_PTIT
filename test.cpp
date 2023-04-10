@@ -1,48 +1,67 @@
 #include <bits/stdc++.h>
-#define endl "\n"
 using namespace std;
-int main()
-{
-	ios_base::sync_with_stdio(0);
-	cin.tie(0);
-	int t;
-	cin >> t;
-	while (t--)
-	{
-		int n, m, k;
-		cin >> n >> m >> k;
-		long long a1[n], a2[m], a3[k];
-		for (int i = 0; i < n; i++)
-			cin >> a1[i];
-		for (int i = 0; i < m; i++)
-			cin >> a2[i];
-		for (int i = 0; i < k; i++)
-			cin >> a3[i];
-		int i = 0, j = 0, h = 0;
-		vector<long long> a;
-		while (i < n && j < m && h < k)
-		{
-			if (a1[i] == a2[j] && a2[j] == a3[h])
-			{
-				a.push_back(a1[i]);
-				i++;
-				j++;
-				h++;
-			}
-			else if (a1[i] < a2[j])
-				i++;
-			else if (a2[j] < a3[h])
-				j++;
-			else
-				h++;
-		}
-		if (a.size() == 0)
-			cout << -1 << endl;
-		else
-		{
-			for (int i = 0; i < a.size(); i++)
-				cout << a[i] << " ";
-			cout << endl;
-		}
-	}
+
+// Cấu trúc để lưu các cạnh đồ thị
+// u, v là 2 đỉnh, c là trọng số cạnh
+struct Edge {
+    int u, v, c;
+    Edge(int _u, int _v, int _c): u(_u), v(_v), c(_c) {};
+};
+
+struct Dsu {
+    vector<int> par;
+
+    void init(int n) {
+        par.resize(n + 5, 0);
+        for (int i = 1; i <= n; i++) par[i] = i;
+    }
+
+    int find(int u) {
+        if (par[u] == u) return u;
+        return par[u] = find(par[u]);
+    }
+
+    bool join(int u, int v) {
+        u = find(u); v = find(v);
+        if (u == v) return false;
+        par[v] = u;
+        return true;
+    }
+} dsu;
+
+// n và m là số đỉnh và số cạnh
+// totalWeight là tổng trọng số các cạnh trong cây khung nhỏ nhất
+int n, m, totalWeight = 0;
+vector < Edge > edges;
+
+int main() {
+    // Fast IO
+    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+
+    cin >> n >> m;
+
+    for (int i = 1; i <= m; i++) {
+        int u, v, c;
+        cin >> u >> v >> c;
+        edges.push_back({u, v, c});
+    }
+
+    dsu.init(n);
+
+    // Sắp xếp lại các cạnh theo trọng số tăng dần
+    sort(edges.begin(), edges.end(), [](Edge & x, Edge & y) {
+        return x.c < y.c;
+    });
+
+    // Duyệt qua các cạnh theo thứ tự đã sắp xếp
+    for (auto e : edges) {
+        // Nếu không hợp nhất được 2 đỉnh u và v thì bỏ qua
+        if (!dsu.join(e.u, e.v)) continue;
+
+        // Nếu hợp nhất được u, v ta thêm trọng số cạnh vào kết quả
+        totalWeight += e.c;
+    }
+
+    // Xuất ra kết quả
+    cout << totalWeight << '\n';
 }
