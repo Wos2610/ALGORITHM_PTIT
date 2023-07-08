@@ -1,0 +1,86 @@
+DSA02002 : Giữa 2 [] là có 1 dấu cách
+DSA02003 : Chỉ tính trường hợp a[1][1] == 1
+DSA02022 : Liệt kê các ngày đúng có 0 và 2 chứ ko phải ngày đặc biệt
+DSA02030 : Liệt kê tổ hợp chập k + giống nhau
+DSA06002 : Nếu giá trị tuyệt đối bằng nhau thì theo thứ tự ban đầu -> dùng pair lưu <abs, index>
+DSA06005 : Sai output mẫu thứ 2, code y hệt DSA06004
+DSA06006 : Sai output mẫu thứ 2
+DSA06009 : 
+DSA06011 : Sort thì sai, không sort thì đúng ( Cùng abs nhưng cái nào xh sau thì in ra )
+DSA06014 : Sai output 2, phải kiểm tra xem i > n trước
+DSA06026 : Sắp xếp theo lớn nhất trước
+DSA06027 : Có n - 1 bươc
+DSA06046 : Sort rồi tìm max giữa 2 phần tử liên tiếp
+DSA06034 : Giống DSA06009
+DSA04002 : Xét riêng trường hợp n = 0
+DSA04035 : Nếu b == 0 thì in 1, nếu ko xét thì sẽ bị MLE
+DSA03013 : Xâu chỉ gồm chữ in hoa
+DSA03004 : Số nhỏ nhất là chữ số ở vị trí chẵn còn số nhỏ thứ hai thì là chữ số vị trí lẻ
+DSA03005 : Phải xét xem k < n - k ?
+DSA02024 : So sánh string, quay lui lưu vector<int> vào vector rùi chuyển vector thành string.
+DSA03006 : Bằng ở vị trí i hoặc n - i - 1 đều được.
+DSA04021 / DSA04005 : Hàm dq() nhớ phải return nếu ko sẽ bị RTE, để long long tất cả.
+DSA04003 : Làm lũy thừa theo chia trị, để long long, không đặt tên pow.
+	   Số dãy số nguyên dương có tổng các phần tử trong dãy bằng n là 2^(n-1).
+DSA08005 : Chia cho 2 để chuyển thập phân sang nhị phân.
+DSA08006 : Dùng deque để sinh các số chỉ có chữ số 0 và 9.
+DSA08007 : Hơi khác với DSA08006.
+DSA08017 : Để lưu kết quả thì phải dùng stack vì vector không đủ để lưu n >= 10.
+DSA09025 : Đường đi bằng DFS. Nếu đã tìm được đường đi thì trong DFS(u) phải return.
+DSA09026 : Đường đi bằng BFS. Sau khi duyệt hết BFS() thì mới xét đến đường đi.
+DSA09027 : Nhớ clear mảng save.
+DSA09013 : Phải sắp xếp kết quả theo thứ tự tăng dần.
+DSA01010 : Không được so sánh cùng i. Ví dụ như test 1 4 5 - > 2 3 4 - > có 3 - 1 thay đổi.
+DSA02004 : Sắp xếp đáp án, nếu a[1][1] == 0, mark[{1, 1}] = 0
+DSA08009 : Nếu temp - 1 > 0 và temp * 2 < 10001 và đánh dấu các phần tử đã xét để tránh MLE.
+DSA02041 : Tương tự DSA08009.
+DSA07009 : Cách chuyển char single to string : string(1, char).
+DSA07013 : Test mẫu 1 dòng cuối không phải dấu trừ mà là gạch.
+DSA02013 : Khó :)))
+DSA04009 : Giống DSA04024.
+DSA04011 : Chuyển NP -> TP.
+(DSA09018 = DSA09012) + DSA09010 : Mỗi test phải clear mảng mark va mang ke[i]
+DSA03018 : Không làm theo cách dùng queue vì giới hạn bộ nhớ: 65536 Kb.
+DSA01018 : Tìm tập con phía trước. Nếu a[i] != a[i + 1] - 1 -> a[i + 1]-- -> Nếu a[k] != n thì tăng mỗi phần tử từ i + 1 lên 1 đv, không thì thôi.
+DSA01016(*) : Cách xóa 1 phần tử cuối cùng trong vector : save.erase(save.end() - 1, save.end());
+DSA02010(*) : 
+DSA07027(*) :
+DSA01012 : Gray
+DSA01013 : Gray -> Binary
+DSA01017 : Binary -> Gray
+DSA05005 : n - độ dài dãy con ko giảm dài nhất (do có trường hợp trùng)
+DSA05012 : chia module, nhớ đến những chỉ số 0
+DSA05026 : Để mảng f[106][25006]
+DSA07003 : Phải dùng getline(cin).
+DSA05013 = DSA05034 : chia 2 khoảng 1 -> k và k + 1 -> n. Chú ý k > n.
+DSA05007 = DSAKT110: cách nhau 2 hoặc 3 và max(f[n], f[n - 1])
+DSA03015 : Xét các trường hợp chết đói, nếu ko chết đói thì tính số ngày ít nhất bằng công thức.
+DSA03035 : Lưu vị trí của các số 1 -> n, tìm dãy con liên tiếp tăng dài nhất, rồi lấy n - cái dài nhất.
+DSA05029(*) : 
+DSA06033 : Dùng mảng left[i] lưu các giá trị min trong đoạn [0, i], rồi dùng 2 con trỏ, lưu ý nếu a[j] > left[i] mới cập nhật (không xét dấu =)
+DSA07004 : Nếu s[i] == ')' và st rỗng thì đổi chiều, cuối cùng sẽ cộng với st.size()/2
+DSA07021(*):
+DSA02036 : Lưu vào save rồi mới sắp xếp chứ ko đổi thành string
+DSA02037 : Giống DSA02036 + sieve, đề bài không nói là sắp xếp dãy con theo giảm dần nhưng vẫn phải làm.
+DSA02039 : Không dùng save<string>
+DSA03016 : Dùng stack
+DSAKT053 : Giống bài xâu con chung dài nhất
+DSA02045 : Nhìn test mẫu phải có nhập n
+CTDL_003 : Là bài toán quay túi có truy vết.
+DSA05006 : Phải f[i] = a[i] 
+DSA05003 : Nếu == thì f[i][j][p] = f[i - 1][j - 1][p - 1] + 1 nếu là max(...,...) thì bị sai (?)
+DSA05016 : Duyệt 3 vòng for đến 100 nếu > LLONG_MAX || <0 thì break
+DSA06035 : Không tính dấu =.
+DSA05017 : Tính tổng lớn nhất dãy con tăng và giảm taị vị trí i.
+DSA05019 : Khi xét QHĐ thì phải tính min
+DSA05028 : ???
+DSA05022 : for(i <= n + 1)
+DSA05042 : Xét f[i] 0 -> n, để k long long, trường hợp k = 0
+DSA09033 : Làm như bình thường ko cần dùng graph.
+DSA05035 : d[i][j] là có i chữ số và chữ số thứ i là j, vì vậy chữ số thứ i - 1 sẽ chạy từ j -> 1, f[i] += f[i - 1]
+DSA08010 : Phải thêm ios_base::sync_with_stdio(0); cin.tie(0);
+DSA08012 : Nếu số r ko thuộc thì phải -1 kết quả.
+DSA07015 : Phải để long long.
+DSA07045 : Hết vòng lặp phải chuyển st1 sang st2 rồi in st2.
+DSA07006 : Sinh nhị phân, chú ý đánh dấu những cái đã in ra rồi để không bị lặp.
+DSA08011 : Phải dùng set, không được dùng map
