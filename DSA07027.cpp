@@ -6,22 +6,36 @@ using namespace std;
 
 int n;
 int a[M];
+int maxx[M];
 
 void process(){
     cin >> n;
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i <= n; i++){
         cin >> a[i];
+        maxx[i] = 0;
     }
 
-    priority_queue<int> pq;
+    stack<int> st;
 
-    pq.push(a[n - 1]);
+    st.push(1);
 
-    for(int i = n - 2; i >= 0; i--){
-
+    for(int i = 2; i <= n; i++){
+        while(st.size() != 0 && a[i] > a[st.top()]){
+            maxx[st.top()] = i;
+            st.pop();
+        }
+        st.push(i);
     }
 
-    cout << res << "\n";
+    for(int i = 1; i <= n; i++){
+        if(maxx[i] == 0){
+            cout << "-1 ";
+        }
+        else{
+            cout << a[maxx[i]] << " ";
+        }
+    }
+    cout << "\n";
 
 }
 

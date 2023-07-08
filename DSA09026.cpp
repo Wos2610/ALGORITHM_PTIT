@@ -16,35 +16,31 @@ void BFS(int u){
 
     while(q.size()){
         int k = q.front();
-        if(k == t){
-            m = 1;
-        }
+        mark[k] = 1;
         q.pop();
         for(int i = 0; i < save[k].size(); i++){
             int p = save[k][i];
             if(mark[p] == 0){
-                mark[p] = 1;
-                q.push(p);
+                q.push(p);;
                 path[p] = k;
+                mark[p] = 1;
             }
+            if(p == t){
+                vector<int> res;
+                while(p != s){
+                    res.push_back(p);
+                    p = path[p];
+                }
+                res.push_back(s);
+                for(int i = res.size() - 1; i >= 0; i--){
+                    cout << res[i] << " ";
+                }
+                m = 1;
+                return;
+            }
+
         }
     }
-
-    if(m == 1){
-        vector<int> res;
-        res.push_back(t);
-        int temp = path[t];
-        while(temp != s){
-            res.push_back(temp);
-            temp = path[temp];
-        }
-
-        res.push_back(temp);
-        for(int i = res.size() - 1; i >= 0; i--){
-            cout << res[i] << " ";
-        }
-    }
-
 }
 
 void process(){
@@ -84,7 +80,6 @@ int main(){
         process();
     }
 }
-
 
 
 

@@ -4,33 +4,33 @@
 
 using namespace std;
 
-long long n, k, m, x, y;
-long long a[M], b[M];
+long long n, k;
+long long a[M];
 
-long long dq(long long n, long long k){
-    if(n == 1){
-        return 1;
-    }
-    if(k == a[n - 1] + 1){
+long long Try(long long n, long long k){
+    if(n == 1) return 1;
+    if(k == a[n]){
         return n;
     }
-    if(k <= a[n - 1]){
-        return dq(n - 1, k);
+    else if(k > a[n]){
+        return Try(n - 1, k - a[n]);
     }
-    return dq(n - 1, k - a[n - 1] - 1);
+    else{
+        return Try(n - 1, k);
+    }
 }
-
 void process(){
     cin >> n >> k;
-    cout << dq(n, k) << "\n";
+    cout << Try(n, k) << "\n";
 }
 
 int main(){
     int T;
     cin >> T;
     a[1] = 1;
+
     for(int i = 2; i <= 50; i++){
-        a[i] = 2 * a[i - 1] + 1;
+        a[i] = a[i - 1] * 2;
     }
     while(T--){
         process();

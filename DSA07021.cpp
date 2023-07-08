@@ -6,28 +6,31 @@ string s;
 void process(){
     cin >> s;
 
-    int n = s.size();
+    long long n = s.size();
 
-    stack<char> st;
+    stack<long long> st;
     long long dem = 0;
     long long res = -1;
-    for(int i = 0; i < n; i++){
+    int d[n + 6] = {0};
+    st.push(-1);
+    for(long long i = 0; i < n; i++){
         if(s[i] == '('){
-            st.push(s[i]);
+            st.push(i);
         }
-        else if(s[i] == ')'){
+        else{
+            st.pop();
             if(st.size() > 0){
-                st.pop();
-                dem++;
+                dem = max(dem, i - st.top());
             }
-            res = max(res, dem);
-            if(st.size() == 0){
-                dem = 0;
+            else{
+                st.push(i);
             }
         }
     }
 
-    cout << res * 2 << "\n";
+
+
+    cout << dem << "\n";
 }
 
 int main()

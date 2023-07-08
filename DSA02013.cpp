@@ -1,49 +1,43 @@
 #include <bits/stdc++.h>
+#define M 206
+
 using namespace std;
 
-int s, p, n, dem, beg, en, m;
-
-int mark[206];
-int a[106];
+int s, p, n, k, l;
+int m[M];
 vector<int> save;
-vector<vector<int>> savee(106);
-
 void sieve(){
-    mark[0] = mark[1] = 1;
+    m[0] = m[1] = 1;
 
-    for(int i = 2; i * i <= 206; i++){
-        if(mark[i] == 0){
-            for(int j = i * i; j <= 206; j += i){
-                mark[j] = 1;
+    for(int i = 2; i <= sqrt(M); i++){
+        if(m[i] == 0){
+            for(int j = i * i; j <= M; j += i){
+                m[j] = 1;
             }
-        }
-
-    }
-
-    for(int i = 2; i <= 206; i++){
-        if(mark[i] == 0){
-            save.push_back(i);
         }
     }
 }
+
+int a[16];
+vector<vector<int>> sa(1006);
+int dem = 0;
 
 void Try(int i){
     if(i == n + 1){
         int sum = 0;
         for(int j = 1; j <= n; j++){
-            //cout << save[a[j]] << " ";
             sum += save[a[j]];
         }
         if(sum == s){
             for(int j = 1; j <= n; j++){
-                savee[dem].push_back(save[a[j]]);
+                sa[dem].push_back(save[a[j]]);
             }
             dem++;
         }
         return;
     }
 
-    for(int j = a[i - 1] + 1; j <= en - n + i; j++){
+    for(int j = a[i - 1] + 1; j <= l - n + i; j++){
         a[i] = j;
         Try(i + 1);
     }
@@ -52,47 +46,36 @@ void Try(int i){
 void process(){
     cin >> n >> p >> s;
 
-    for(int i = 0; i < savee.size(); i++){
-        savee[i].clear();
+    dem = 0;
+
+    for(int i = 1; i <= n; i++){
+        a[i] = 0;
     }
-    beg = -1;
-    en = -1;
+    k = upper_bound(save.begin(), save.end(), p) - save.begin();
+    l = lower_bound(save.begin(), save.end(), s) - save.begin();
 
-    for(int i = 0; i < save.size(); i++){
-        if(save[i] > p){
-            beg = i;
-            break;
-        }
-    }
-
-    for(int i = save.size() - 1; i >= 0; i--){
-        if(save[i] <= s){
-            en = i;
-            break;
-        }
-    }
-
-    //cout << beg << " " << en << "\n";
-    m = en - beg + 1;
-
-    if(n > m){
+    //cout << k << " " << l << "\n";
+    if(l - k + 1 < n){
         cout << "0\n";
         return;
     }
-
-    a[0] = beg - 1;
-    dem = 0;
+    a[0] = k - 1;
     Try(1);
 
+    sort(sa.begin(), sa.begin() + dem);
+
     cout << dem << "\n";
-    for(int i = 0; i < dem;i++){
-        for(int j = 0; j < savee[i].size(); j++){
-            cout << savee[i][j] << " ";
+    for(int i = 0; i < dem; i++){
+        for(int j = 0; j < n; j++){
+            cout << sa[i][j] << " ";
         }
         cout << "\n";
     }
 
-    cout << "\n";
+    for(int i = 0; i < dem; i++){
+        sa[i].clear();
+    }
+
 }
 
 int main()
@@ -100,6 +83,11 @@ int main()
     int T;
     cin >> T;
     sieve();
+
+    for(int i = 2; i <= M; i++){
+        if(m[i] == 0) save.push_back(i);
+    }
+
     while(T--){
         process();
     }

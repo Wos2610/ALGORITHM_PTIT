@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"d:\\Documents\\ALGORITHM_PTIT\\ThucHanh\\A.cpp","tests":[{"id":1683328063574,"input":"3\n\n((a)\n\n(a))\n\n(((abc))((d)))))","output":"-10a1\n0a1-1\n000abc1100d111-1-1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\Documents\\ALGORITHM_PTIT\\ThucHanh\\A.cpp","group":"local","local":true}

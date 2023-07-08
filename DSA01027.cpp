@@ -1,46 +1,49 @@
 #include<bits/stdc++.h>
-
+#define M 1000006
 using namespace std;
 
-int a[1006], b[1006], mark[1006];
-int n, k, d;
 
+int n;
+int a[M], b[M], m[M];
 
 void Try(int i){
     if(i == n + 1){
-       for(int j = 1; j <= n; j++){
-            cout << b[a[j]] << " ";
-       }
-       cout << "\n";
-       return;
+        for(int j = 1; j <= n; j++){
+            cout << a[b[j]] << " ";
+        }
+        cout << "\n";
+        return;
     }
 
     for(int j = 1; j <= n; j++){
-        if(mark[j] == 0){
-            a[i] = j;
-            mark[j] = 1;
+        if(m[j] == 0){
+            b[i] = j;
+            m[j] = 1;
             Try(i + 1);
-            mark[j] = 0;
+            m[j] = 0;
         }
     }
 }
 
 void process(){
-    cin >> n ;
-
+    cin >> n;
     for(int i = 1; i <= n; i++){
-        cin >> b[i];
+        cin >> a[i];
+        m[i] = 0;
+        b[i] = 0;
     }
 
-    sort(b + 1, b + 1 + n);
+    sort(a + 1, a + 1 + n);
 
     Try(1);
-
-    cout << "\n";
 }
 
 int main(){
-    process();
+    int T = 1;
+    //cin >> T;
+    while(T--){
+        process();
+    }
 }
 
 

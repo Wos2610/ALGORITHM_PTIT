@@ -4,31 +4,27 @@
 
 using namespace std;
 
-long long n, k, m, x, y;
-long long a[M], b[M];
+int n;
 
-void binary(int i){
+void change(int a){
     string res = "";
-    while(i > 0){
-        if(i % 2 == 0){
+    while(a > 0){
+        if(a % 2 == 0){
             res = "0" + res;
         }
         else{
             res = "1" + res;
-            i--;
+            a--;
         }
-        i /= 2;
+        a /= 2;
     }
 
     cout << res << " ";
 }
-
 void process(){
-    int n;
     cin >> n;
-
     for(int i = 1; i <= n; i++){
-        binary(i);
+        change(i);
     }
     cout << "\n";
 }

@@ -12,20 +12,28 @@ void process(){
     getline(cin, s);
     int n = s.size();
 
-    stack<int> st;
-
+    stack<char> st;
+    int mark = 0;
     for(int i = 0; i < n; i++){
-        if(s[i] == '('){
-            st.push(1);
+        if(s[i] == '(' || s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/'){
+            st.push(s[i]);
         }
         else if(s[i] == ')'){
-            if(st.size()){
+            if(st.top() == '('){
+                mark = 1;
+                break;
+            }
+            while(st.size()){
+                char temp = st.top();
                 st.pop();
+                if(temp == '('){
+                    break;
+                }
             }
         }
     }
 
-    if(st.size()){
+    if(mark){
         cout << "Yes\n";
     }
     else{

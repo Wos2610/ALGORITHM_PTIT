@@ -1,67 +1,104 @@
 #include <bits/stdc++.h>
+#define endl "\n"
 using namespace std;
-
-// Cấu trúc để lưu các cạnh đồ thị
-// u, v là 2 đỉnh, c là trọng số cạnh
-struct Edge {
-    int u, v, c;
-    Edge(int _u, int _v, int _c): u(_u), v(_v), c(_c) {};
+struct data
+{
+    int x, y, s;
 };
-
-struct Dsu {
-    vector<int> par;
-
-    void init(int n) {
-        par.resize(n + 5, 0);
-        for (int i = 1; i <= n; i++) par[i] = i;
+int main()
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        int n;
+        cin >> n;
+        cin.ignore();
+        int check[n][n] = {};
+        char a[n][n];
+        struct data u, v, ed;
+        queue<struct data> q;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                cin >> a[i][j];
+        cin >> u.x >> u.y >> ed.x >> ed.y;
+        check[u.x][u.y] = 1;
+        u.s = 0;
+        q.push(u);
+        while (q.size())
+        {
+            u = q.front();
+            q.pop();
+            if (u.x == ed.x && u.y == ed.y)
+            {
+                cout << u.s << endl;
+                break;
+            }
+            v.s = u.s + 1;
+            v.y = u.y;
+            for (int i = u.x + 1; i < n; i++)
+            {
+                if (a[i][u.y] == 'X' || check[i][u.y])
+                    break;
+                v.x = i;
+                check[i][u.y] = 1;
+                q.push(v);
+            }
+            for (int i = u.x - 1; i >= 0; i--)
+            {
+                if (a[i][u.y] == 'X' || check[i][u.y])
+                    break;
+                v.x = i;
+                check[i][u.y] = 1;
+                q.push(v);
+            }
+            v.x = u.x;
+            for (int i = u.y + 1; i < n; i++)
+            {
+                if (a[u.x][i] == 'X' || check[u.x][i])
+                    break;
+                v.y = i;
+                check[u.x][i] = 1;
+                q.push(v);
+            }
+            for (int i = u.y - 1; i >= 0; i--)
+            {
+                if (a[u.x][i] == 'X' || check[u.x][i])
+                    break;
+                v.y = i;
+                check[u.x][i] = 1;
+                q.push(v);
+            }
+        }
     }
-
-    int find(int u) {
-        if (par[u] == u) return u;
-        return par[u] = find(par[u]);
-    }
-
-    bool join(int u, int v) {
-        u = find(u); v = find(v);
-        if (u == v) return false;
-        par[v] = u;
-        return true;
-    }
-} dsu;
-
-// n và m là số đỉnh và số cạnh
-// totalWeight là tổng trọng số các cạnh trong cây khung nhỏ nhất
-int n, m, totalWeight = 0;
-vector < Edge > edges;
-
-int main() {
-    // Fast IO
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-
-    cin >> n >> m;
-
-    for (int i = 1; i <= m; i++) {
-        int u, v, c;
-        cin >> u >> v >> c;
-        edges.push_back({u, v, c});
-    }
-
-    dsu.init(n);
-
-    // Sắp xếp lại các cạnh theo trọng số tăng dần
-    sort(edges.begin(), edges.end(), [](Edge & x, Edge & y) {
-        return x.c < y.c;
-    });
-
-    // Duyệt qua các cạnh theo thứ tự đã sắp xếp
-    for (auto e : edges) {
-        // Nếu không hợp nhất được 2 đỉnh u và v thì bỏ qua
-        if (!dsu.join(e.u, e.v)) continue;
-
-        // Nếu hợp nhất được u, v ta thêm trọng số cạnh vào kết quả
-        totalWeight += e.c;
-    }
-
-    // Xuất ra kết quả
-    cout << totalWeight << '\n';
 }
+/* Do Xuan Huong
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@##################@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@#############################@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@&####################################@@@@@@@@@@@@
+@@@@@@@@@@##########################################@@@@@@@@@
+@@@@@@@@##############################################@@@@@@@
+@@@@@@#################################################@@@@@@
+@@@@@####################################################@@@@
+@@@%#####################@@@@@@@@@@@######################@@@
+@@@###################@@@@@@@@@@@@@@@@@####################@@
+@@##################@@@@@@         @@@@@@##################@@
+@@#################@@@@@             @@@@###################@
+@@@@@@@@@@@@@@@@@@@@@@@@             @@@@@@@@@@@@@@@@@@@@@@@@
+@                  &@@@@             @@@@           .......@@
+@@                  @@@@@@         @@@@@@           .......@@
+@@                    @@@@@@@@@@@@@@@@@            .......@@@
+@@@                      @@@@@@@@@@@               ......@@@@
+@@@@                                              ......@@@@@
+@@@@@@                                           ......@@@@@@
+@@@@@@@                                         .....@@@@@@@@
+@@@@@@@@@                                     .....@@@@@@@@@@
+@@@@@@@@@@@@                                ....@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@                         ....@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@%                .@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
+

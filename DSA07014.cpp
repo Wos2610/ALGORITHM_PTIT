@@ -1,51 +1,57 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
+
 using namespace std;
 
-string s;
-
-void process(){
+void process()
+{
+    string s;
     cin >> s;
-
     int n = s.size();
 
     stack<int> st;
-    int x1 = 0;
-    int x2 = 0;
+
     for(int i = n - 1; i >= 0; i--){
-        if(st.size() >= 2){
-            x2 = st.top();
-            st.pop();
-            x1 = st.top();
-            st.pop();
-        }
-        if(s[i] == '+'){
-            st.push(x2 + x1);
-        }
-        else if(s[i] == '-'){
-            st.push(x2 - x1);
-        }
-        else if(s[i] == '*'){
-            st.push(x2 * x1);
-        }
-        else if(s[i] == '/'){
-            st.push(x2 / x1);
+        if(s[i] >= '0' && s[i] <= '9'){
+            st.push(s[i] - '0');
         }
         else{
-            st.push(x1);
-            st.push(x2);
-            st.push(s[i] - '0');
+            if(st.size() >= 2){
+                int x1 = st.top();
+                st.pop();
+                int x2 = st.top();
+                st.pop();
+                switch(s[i]){
+                    case '+': {
+                        st.push(x1 + x2);
+                        break;
+                    }
+                    case '-': {
+                        st.push(x1 - x2);
+                        break;
+                    }
+                    case '*': {
+                        st.push(x1 * x2);
+                        break;
+                    }
+                    case '/': {
+                        st.push(x1 / x2);
+                        break;
+                    }
+                }
+            }
         }
     }
 
     cout << st.top() << "\n";
-
 }
 
 int main()
 {
-    int T ;
+    int T = 1;
     cin >> T;
-    while(T--){
+
+    while(T--)
+    {
         process();
     }
 }
